@@ -4,8 +4,6 @@ import 'package:find_that_emoji/core/extensions/context_extensions.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:awesome_emojis/emoji.dart' as emojiLibrary;
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:find_that_emoji/core/services/locator.dart';
-import 'package:find_that_emoji/core/services/sound_service.dart';
 import 'package:flutter/material.dart';
 
 class NormalGame extends StatelessWidget {
