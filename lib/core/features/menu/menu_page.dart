@@ -2,12 +2,26 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:find_that_emoji/common/buttons/menu_button.dart';
 import 'package:find_that_emoji/constants/animation_assets.dart';
 import 'package:find_that_emoji/constants/image_assets.dart';
+import 'package:find_that_emoji/core/features/game_mode/game_mode.dart';
+import 'package:find_that_emoji/core/services/locator.dart';
+import 'package:find_that_emoji/core/services/sound_service.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class MenuPage extends StatelessWidget {
+class MenuPage extends StatefulWidget {
   static const routeName = '/menuPage';
   const MenuPage({super.key});
+
+  @override
+  State<MenuPage> createState() => _MenuPageState();
+}
+
+class _MenuPageState extends State<MenuPage> {
+  @override
+  void initState() {
+    super.initState();
+    locator.get<SoundService>().playBackgroundMusic();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +72,8 @@ class MenuPage extends StatelessWidget {
       child: MenuButton(
           message: 'Exit',
           callBackFunction: () {
+            locator.get<SoundService>().stopBackgroundMusic();
+            locator.get<SoundService>().playButtonSound();
             // settingsProvider.isSoundEnabled
             //     ? SoundProvider.playButtonSound()
             //     : null;
@@ -71,6 +87,7 @@ class MenuPage extends StatelessWidget {
       child: MenuButton(
           message: 'High scores',
           callBackFunction: () {
+            locator.get<SoundService>().playButtonSound();
             // settingsProvider.isSoundEnabled
             //     ? SoundProvider.playButtonSound()
             //     : null;
@@ -84,6 +101,7 @@ class MenuPage extends StatelessWidget {
       child: MenuButton(
           message: 'Settings',
           callBackFunction: () {
+            locator.get<SoundService>().playButtonSound();
             // settingsProvider.isSoundEnabled
             //     ? SoundProvider.playButtonSound()
             //     : null;
@@ -99,8 +117,8 @@ class MenuPage extends StatelessWidget {
       child: MenuButton(
           message: 'New game',
           callBackFunction: () {
-            // Navigator.of(context).push(SharedAxisPageRoute(
-            //     page: const LoadingPage(newPage: GameModePage())));
+            locator.get<SoundService>().playButtonSound();
+            Navigator.of(context).pushNamed(GameMode.routeName);
           }),
     );
   }
